@@ -1,3 +1,5 @@
+import { ApiResponse } from "../../shared/store/ApiStore/types"
+
 export type GetOrganizationReposListParams = {
     organizationName: string
 }
@@ -14,13 +16,8 @@ export type RepoItem = {
     }
 }
 
-export type ApiResp<repos> = {
-    success: boolean,
-    repos: repos
-}
-
 export interface IGitHubStore {
-    baseUrl: string;
 
-    getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>>;
+    getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResponse<RepoItem[], any>>;
+    postOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResponse<RepoItem[], any>>;
 }

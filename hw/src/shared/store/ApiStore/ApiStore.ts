@@ -1,5 +1,5 @@
-import { findConfigFile } from "typescript";
-import {ApiResponse, IApiStore, RequestParams, HTTPMethod} from "./types";
+import {ApiResponse, IApiStore, RequestParams, HTTPMethod, StatusHTTP} from "./types";
+import qs from 'qs'
 
 export default class ApiStore implements IApiStore {
     readonly baseUrl: string;
@@ -8,32 +8,44 @@ export default class ApiStore implements IApiStore {
         this.baseUrl = baseUrl
     }
 
-    request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
-        let qs = require('qs');
-        let query = params.method === HTTPMethod.GET ? "?" + qs.stringify(params.data) : "";
-        let url = this.baseUrl + params.endpoint + query;
-        //console.log(url)
+    async request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
+        let url = `${this.baseUrl}${params.endpoint}`;
+        let body: any = null;
+        const headers = {...params.headers};
 
-        async function GetRequest(url: string): Promise<ApiResponse<SuccessT, ErrorT>> {
-            let response: any = await fetch(url)
-            .then(function(response) {
-                if (response.ok) 
-                    return {
-                        success: true,
-                        data: response.json(),
-                        status: response.status,
-                    };
-                else 
-                    return {
-                        success: false,
-                        data: response.json(),
-                        status: response.status,
-                    };
-            })
-
-            return response
+        if (params.method === HTTPMethod.GET) {
+            url = `${url}?${qs.stringify(params.data)}`
+        }
+        if (params.method === HTTPMethod.POST) {
+            body =  JSON.stringify(params.data)
+            headers ['Content-Type'] = 'application/json;charset=UTF-8'
         }
 
-        return GetRequest(url)
+        try {
+            let response: any = await fetch(url, {
+                method: params.method,
+                headers,
+                body,
+            })
+            if (response.ok) 
+                return {
+                    success: true,
+                    data: await response.json(),
+                    status: response.status,
+                };
+            else 
+                return {
+                    success: false,
+                    data: await response.json(),
+                    status: response.status,
+                };
+        }catch(e) {
+            return {
+                success: false,
+                data: e,
+                status: StatusHTTP.UNEXPECTED_ERROR,
+            };
+        }
+
     }
 }

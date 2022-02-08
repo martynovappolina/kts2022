@@ -19,13 +19,14 @@ export type RequestParams<ReqT> = {
 }
 
 // Перечисление статусов ответа
-enum StatusHTTP {
+export enum StatusHTTP {
     Accepted = 202,
     AlreadyReported =  208,
     BadRequest = 400,
     BadGateway = 502,
     Success = 200,
-    Error = 404
+    Error = 404,
+    UNEXPECTED_ERROR = 'UNEXPECTED_ERROR'
 }
 
 // Ответ API
@@ -39,7 +40,13 @@ export type ApiResponse<SuccessT, ErrorT> =
     success: false;
     data: ErrorT;
     status: StatusHTTP;
-};
+}
+    | {
+    success: false;
+    data: any;
+    status: StatusHTTP;
+    }
+;
 
 // Интерфейс для класса, с помощью которого можно делать запросы к API
 export interface IApiStore {
