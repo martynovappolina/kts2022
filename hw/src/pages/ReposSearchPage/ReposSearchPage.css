@@ -1,0 +1,33 @@
+.main {
+    background-color: var(--bacground-primary);
+    width: 27vw;
+    height: 100vh;
+    padding: 2vmin;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 8% 92%;
+}
+
+.SearchBar {
+   display: flex;
+   justify-content: space-between;
+}
+
+.SearchBar__InputLine:disabled {
+    background: var(--disabled);
+}
+
+.ReposList {
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.ReposList::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}

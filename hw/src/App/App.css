@@ -1,0 +1,16 @@
+:root {
+    --bacground-primary: white;
+    --color-hint: #7E7E7E;
+    --color-default: black;
+    --color-border: #D9D9D9;
+    --accent: #FF5555;
+    --star-accent: #FF9432;
+    --link-hover: #208FBF;
+    --disabled: #F9F9F9;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}

@@ -5,15 +5,15 @@ export type GetOrganizationReposListParams = {
 }
 
 export type RepoItem = {
-    id: number,
+    id: number;
     name: string,
-    description: string,
     owner: {
-        name: string,
-        avatar_url?: string,
-        type: string
-        site_admin: string
+        login: string,
+        avatar_url: string
     }
+    created_at: string
+    stargazers_count: number
+    
 }
 
 export interface IGitHubStore {

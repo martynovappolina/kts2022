@@ -1,0 +1,16 @@
+.SearchButton {
+    width: 7vh;
+    height: 7vh;
+    background: var(--accent);
+    border-radius: 1vh;
+    border: none;
+}
+
+.SearchButton:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.SearchButton:disabled {
+    background: var(--color-border)
+}

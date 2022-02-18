@@ -1,0 +1,13 @@
+.InputLine {
+    width: 23vw;
+    height: 7vh;
+    background: var(--bacground-primary);
+    border: 1px solid var(--color-border);
+    box-sizing: border-box;
+    border-radius: 1vh;
+}
+
+.InputLine:focus {
+    border: 1px solid var(--accent);
+    outline:none;
+}
