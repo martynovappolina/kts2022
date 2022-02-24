@@ -1,0 +1,13 @@
+.Avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 13vh;
+    width: 13vh;
+    background: var(--accent);
+    border-radius: 50%;
+    font-weight: bold;
+    color: var(--bacground-primary);
+    font-size: 8vh;
+}
