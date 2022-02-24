@@ -1,4 +1,4 @@
-.InputLine {
+.input-line {
     width: 23vw;
     height: 7vh;
     background: var(--bacground-primary);
@@ -7,7 +7,7 @@
     border-radius: 1vh;
 }
 
-.InputLine:focus {
+.input-line:focus {
     border: 1px solid var(--accent);
     outline:none;
 }

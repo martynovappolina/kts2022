@@ -7,10 +7,10 @@ import { ApiResponse } from 'src/shared/store/ApiStore/types'
 import { RepoItem } from 'src/store/GitHubStore/types'
 
 import './ReposSearchPage.css'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const ReposSearchPage = () => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState('ktsstudio');
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([{
         id: 123,    
@@ -27,19 +27,23 @@ const ReposSearchPage = () => {
     const handleInput = useCallback((e) => setValue(e.target.value), [])
 
     const handleClick = useCallback(() => {
-        const getData = async () => {
-          try {
-            await gitHubStore.getOrganizationReposList({
-              organizationName: value
-            }).then((result: ApiResponse<RepoItem[], any>) => {
-                setData(result.data)
-                setIsLoading(false)
-              })
-          } catch (e) {}
+        const GetData = async () => {
+            try {
+                await gitHubStore.getOrganizationReposList({
+                  organizationName: value
+                }).then((result: ApiResponse<RepoItem[], any>) => {
+                    setData(result.data)
+                    setIsLoading(false)
+                  })
+            } catch (e) {}
         };
+
         setIsLoading(true)
-        getData();
+        GetData();
     },[value, data]);
+
+    
+    useEffect(() => handleClick(), [])
 
     return (
         <>
@@ -55,7 +59,7 @@ const ReposSearchPage = () => {
                 {   
                     data.map(repo =>( 
                         <RepoTile 
-                            key={repo.id} 
+                            key={repo.id}
                             onClick={() => console.log("RepoTile is clicked")} 
                             RepoItem={repo}/>
                     ))

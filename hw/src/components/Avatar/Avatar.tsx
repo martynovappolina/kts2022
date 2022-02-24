@@ -8,11 +8,10 @@ type AvatarProps = {
 }
 
 const Avatar: React.FC<AvatarProps> = ({src, alt, letter}) => {
-    return (
-    <>{
-        src ? <img className="Avatar" src={src} alt = {alt}/>
-        : <div className="Avatar">{letter?.toUpperCase()}</div>
-    }</>)
+    if (src) {
+        return <img className="Avatar" src={src} alt = {alt}/>;
+     }
+      return <div className="Avatar">{letter?.toUpperCase()}</div>;
 }
 
 export default React.memo(Avatar)

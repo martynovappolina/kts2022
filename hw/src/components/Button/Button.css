@@ -1,4 +1,4 @@
-.SearchButton {
+.search-button {
     width: 7vh;
     height: 7vh;
     background: var(--accent);
@@ -6,11 +6,11 @@
     border: none;
 }
 
-.SearchButton:hover {
+.search-button:hover {
     cursor: pointer;
     opacity: 0.7;
 }
 
-.SearchButton:disabled {
+.search-button:disabled {
     background: var(--color-border)
 }
