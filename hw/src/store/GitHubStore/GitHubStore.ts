@@ -1,5 +1,5 @@
 import ApiStore from '../../shared/store/ApiStore';
-import { IGitHubStore, RepoItem, GetOrganizationReposListParams } from "./types";
+import { IGitHubStore, RepoItem, GetOrganizationReposListParams, GetOrganizationRepoParams } from "./types";
 import { RequestParams, HTTPMethod, ApiResponse} from '../../shared/store/ApiStore/types';
 
 const BASE_URL = 'https://api.github.com/'
@@ -19,6 +19,20 @@ export default class GitHubStore implements IGitHubStore {
         }
 
         return await this.apiStore.request<RepoItem[]>(request)
+    }
+
+    async getOrganizationRepo(params: GetOrganizationRepoParams): Promise<ApiResponse<RepoItem, any>> {
+        let request: RequestParams<object> = {
+            method: HTTPMethod.GET,
+            endpoint: `repos/${params.organizationName}/${params.name}`,
+            headers: {
+                accept: "application/vnd.github.v3+json"
+            },
+            data: {
+                }
+        }
+
+        return await this.apiStore.request<RepoItem>(request)
     }
 
     async postOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResponse<RepoItem[], any>> {

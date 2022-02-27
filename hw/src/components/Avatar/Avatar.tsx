@@ -1,5 +1,5 @@
-import React from 'react'
-import './Avatar.css'
+import React from 'react';
+import './Avatar.scss';
 
 type AvatarProps = {
     src?: string,

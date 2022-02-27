@@ -1,0 +1,56 @@
+@import '@styles/variables.scss';
+
+.repo-tile {
+    display: flex;
+    justify-content: flex-start;
+    background: $background-primary;
+    border: 1px solid $color-border;
+    box-sizing: border-box;
+    border-radius: 1vh;
+    width: 27vw;
+    height: 17vh;
+    margin: 1vh 0;
+    padding: 2vh;
+
+    &__Content {
+        display: flex;
+        flex-direction: column;
+        margin: 2vh;
+    }
+
+    &__OrgName {
+        font-size: 2vh;
+        color: $color-hint;
+    }
+
+    &__OrgName:hover {
+        color: $link-hover;
+    }
+
+    &__RepoName {
+        font-weight: bold;
+        font-size: 3vh;
+        height: 3.5vh;
+        width: 17vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__Info {
+        display: inline-block;
+        
+        font-size: 2vh;
+        color: var(--color-hint);
+    }
+
+    &__StarFrame {
+        display: inline-block;
+        margin-right: 2.5vh;
+    }
+}
+
+.repo-tile:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 6px rgba(182, 182, 182, 0.25);
+}

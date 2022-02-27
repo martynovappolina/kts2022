@@ -1,0 +1,52 @@
+@import '@styles/variables.scss';
+
+.background {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+}
+
+.repo-item {
+    width: 20vw;
+    height: 40vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 0.2vh black;
+    border-radius: 3vh;
+    padding: 2vh;
+
+    &__text {
+        font-size: 2vh;
+        color: $color-hint;
+    }
+
+    &__RepoName {
+        font-weight: bold;
+        font-size: 3vh;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__button {
+        width: 4vw;
+        height: 3vh;
+        background: $accent;
+        border-radius: 0.5vh;
+        border: 0.1vh solid black;
+        font-size: 2vh;
+    }
+
+    &__button:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}

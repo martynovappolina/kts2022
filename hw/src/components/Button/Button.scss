@@ -1,7 +1,9 @@
+@import '@styles/variables.scss';
+
 .search-button {
     width: 7vh;
     height: 7vh;
-    background: var(--accent);
+    background: $accent;
     border-radius: 1vh;
     border: none;
 }
@@ -12,5 +14,5 @@
 }
 
 .search-button:disabled {
-    background: var(--color-border)
+    background: $color-border;
 }

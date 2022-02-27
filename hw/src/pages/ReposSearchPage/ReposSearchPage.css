@@ -16,18 +16,3 @@
 .SearchBar__InputLine:disabled {
     background: var(--disabled);
 }
-
-.ReposList {
-    height: 88vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.ReposList::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
