@@ -1,4 +1,4 @@
-import './Repotile.scss';
+import RepotileStyle from './Repotile.module.scss';
 
 import React from 'react';
 
@@ -16,13 +16,13 @@ const Repotile: React.FC<RepoTileProps> = ({ onClick, RepoItem }) => {
         onClick(RepoItem.name);
     };
     return (
-        <div className="repo-tile" onClick={oonClick}>
+        <div className={RepotileStyle.repotile} onClick={oonClick}>
             <Avatar src={RepoItem.owner.avatar_url} letter={RepoItem.owner.login[0]} />
-            <div className="repo-tile__Content">
-                <div className="repo-tile__RepoName">{RepoItem.name}</div>
-                <div className="repo-tile__OrgName">{RepoItem.owner.login}</div>
-                <div className="repo-tile__Info">
-                    <div className="repo-tile__StarFrame">
+            <div className={RepotileStyle.repotile__Content}>
+                <div className={RepotileStyle.repotile__RepoName}>{RepoItem.name}</div>
+                <div className={RepotileStyle.repotile__OrgName}>{RepoItem.owner.login}</div>
+                <div className={RepotileStyle.repotile__Info}>
+                    <div className={RepotileStyle.repotile__StarFrame}>
                         <StarIcon />
                         {RepoItem.stargazers_count}
                     </div>

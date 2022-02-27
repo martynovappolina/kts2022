@@ -1,6 +1,6 @@
 @import '@styles/variables.scss';
 
-.input-line {
+.input_line {
     width: 23vw;
     height: 7vh;
     background: $background-primary;
@@ -9,7 +9,7 @@
     border-radius: 1vh;
 }
 
-.input-line:focus {
+.input_line:focus {
     border: 1px solid $accent;
     outline:none;
 }

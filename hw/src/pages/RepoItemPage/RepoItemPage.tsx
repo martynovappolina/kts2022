@@ -36,13 +36,15 @@ const RepoItemPage: React.FC<RepoItemPageProps> = ({visible, setVisible, isLoadi
             GetData();
             load(false);
         }
-
     }, []);
+
+    if (visible) GetRepo(ReposContext.data[0].owner.login, 'notific', visible, isLoading)
     
-    if(visible) GetRepo(ReposContext.data[0].owner.login, 'notific', visible, isLoading)
-    console.log(name)
     if (visible && data) return <Repo RepoItem={data} setVisible={setVisible}/>;
     return null;
+
+    //у меня не получается использовать name нормально, я не понимаю почему, GetRepo вызывается только тогда, когда name undefined
+    //я добавляла условие name!==undefined, тогда GetRepo вообще никогда не вызывается
 };
 
 export default RepoItemPage;

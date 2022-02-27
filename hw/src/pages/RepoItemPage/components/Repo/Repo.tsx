@@ -1,4 +1,5 @@
-import "./Repo.scss"
+import RepoStyle from "./Repo.module.scss";
+import RepotileStyle from '@components/RepoTile/Repotile.module.scss';
 
 import React from "react";
 import { RepoItem } from "src/store/GitHubStore/types";
@@ -13,16 +14,16 @@ type RepoProps = {
 
 const Repo: React.FC<RepoProps> = ({RepoItem, setVisible}) => {
     return (
-        <div className="background">
-            <div className='repo-item'>
+        <div className={RepoStyle.background}>
+            <div className={RepoStyle.repoitem}>
                 <Avatar src={RepoItem.owner.avatar_url} letter={RepoItem.owner.login[0]} />
-                <div className="repo-item__RepoName">{RepoItem.name}</div>
-                <div className="repo-tile__Content">
-                    <div className="repo-item__text">Владелец: {RepoItem.owner.login}</div>
-                    <div className="repo-item__text">Описание: {RepoItem.description}</div>
-                    <div className="repo-item__text">Язык: {RepoItem.language}</div>
-                    <div className="repo-tile__Info">
-                        <div className="repo-tile__StarFrame">
+                <div className={RepoStyle.repoitem__RepoName}>{RepoItem.name}</div>
+                <div className={RepotileStyle.repotile__Content}>
+                    <div className={RepoStyle.repoitem__text}>Владелец: {RepoItem.owner.login}</div>
+                    <div className={RepoStyle.repoitem__text}>Описание: {RepoItem.description}</div>
+                    <div className={RepoStyle.repoitem__text}>Язык: {RepoItem.language}</div>
+                    <div className={RepotileStyle.repotile__Info}>
+                        <div className={RepotileStyle.repotile__StarFrame}>
                             <StarIcon />
                             {RepoItem.stargazers_count}
                         </div>
@@ -30,7 +31,7 @@ const Repo: React.FC<RepoProps> = ({RepoItem, setVisible}) => {
                     </div>
                 </div>
                 <Link to={`/repos`}> 
-                    <button className="repo-item__button" onClick={() => setVisible(false)}>Назад</button>
+                    <button className={RepoStyle.repoitem__button} onClick={() => setVisible(false)}>Назад</button>
                 </Link>
             </div>
         </div>
