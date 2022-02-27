@@ -1,3 +1,5 @@
+@import '@styles/variables.scss';
+
 .Avatar {
     display: flex;
     justify-content: center;
@@ -5,9 +7,9 @@
     text-align: center;
     height: 13vh;
     width: 13vh;
-    background: var(--accent);
+    background: $accent;
     border-radius: 50%;
     font-weight: bold;
-    color: var(--bacground-primary);
+    color: $background-primary;
     font-size: 8vh;
 }

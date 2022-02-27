@@ -4,6 +4,11 @@ export type GetOrganizationReposListParams = {
     organizationName: string
 }
 
+export type GetOrganizationRepoParams = {
+    organizationName: string
+    name: string;
+}
+
 export type RepoItem = {
     id: number;
     name: string,
@@ -13,7 +18,8 @@ export type RepoItem = {
     }
     created_at: string
     stargazers_count: number
-    
+    language: string
+    description: string
 }
 
 export interface IGitHubStore {
