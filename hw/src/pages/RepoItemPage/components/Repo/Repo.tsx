@@ -2,13 +2,13 @@ import RepoStyle from "./Repo.module.scss";
 import RepotileStyle from '@components/RepoTile/Repotile.module.scss';
 
 import React from "react";
-import { RepoItem } from "src/store/GitHubStore/types";
+import { RepoItemModel } from "src/store/models/gitHub";
 import StarIcon from '@components/StarIcon';
 import Avatar from '@components/Avatar';
 import { Link } from "react-router-dom";
 
 type RepoProps = {
-    RepoItem: RepoItem;
+    RepoItem: RepoItemModel;
     setVisible: (e: boolean) => void
 }
 
@@ -16,7 +16,7 @@ const Repo: React.FC<RepoProps> = ({RepoItem, setVisible}) => {
     return (
         <div className={RepoStyle.background}>
             <div className={RepoStyle.repoitem}>
-                <Avatar src={RepoItem.owner.avatar_url} letter={RepoItem.owner.login[0]} />
+                <Avatar src={RepoItem.owner.avatarUrl} letter={RepoItem.owner.login[0]} />
                 <div className={RepoStyle.repoitem__RepoName}>{RepoItem.name}</div>
                 <div className={RepotileStyle.repotile__Content}>
                     <div className={RepoStyle.repoitem__text}>Владелец: {RepoItem.owner.login}</div>
@@ -25,9 +25,9 @@ const Repo: React.FC<RepoProps> = ({RepoItem, setVisible}) => {
                     <div className={RepotileStyle.repotile__Info}>
                         <div className={RepotileStyle.repotile__StarFrame}>
                             <StarIcon />
-                            {RepoItem.stargazers_count}
+                            {RepoItem.stargazersCount}
                         </div>
-                        Updated {RepoItem.created_at}
+                        Updated {RepoItem.createdAt}
                     </div>
                 </div>
                 <Link to={`/repos`}> 

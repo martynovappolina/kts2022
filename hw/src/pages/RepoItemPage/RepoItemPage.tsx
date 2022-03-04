@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useReposContext } from '@pages/ReposSearchPage/ReposSearchPage';
 
 import { ApiResponse } from 'src/shared/store/ApiStore/types';
-import { RepoItem } from 'src/store/GitHubStore/types';
+import { RepoItemModel } from 'src/store/models/gitHub';
 import Repo from './components/Repo';
-import GitHubStore from '../../store/GitHubStore';
+import GitHubStore from '../../store/ReposListStore';
 
 type RepoItemPageProps = {
     visible: boolean;
@@ -16,29 +16,29 @@ type RepoItemPageProps = {
 
 const RepoItemPage: React.FC<RepoItemPageProps> = ({visible, setVisible, isLoadingRepo}) => {
     const { name } = useParams<{ name: string}>();
-    const [data, setData] = useState<RepoItem>();
+    const [data, setData] = useState<RepoItemModel>();
     const [isLoading, load] = useState(isLoadingRepo);
     const gitHubStore = new GitHubStore();
     const ReposContext = useReposContext();
     
-    const GetRepo = useCallback((orgname, reponame, visible, isLoading) => {
+    const GetRepo = useCallback((orgname, reponame, isLoading) => {
         const GetData = async () => {
             try {
                 await gitHubStore
                     .getOrganizationRepo({ organizationName: orgname, name: reponame })
-                    .then((result: ApiResponse<RepoItem, any>) => {
+                    .then((result: ApiResponse<RepoItemModel, any>) => {
                         setData(result.data);
                     });
             } catch (e) {}
         };
-        
-        if(visible && isLoading) {
+
+        if(isLoading) {
             GetData();
             load(false);
         }
-    }, []);
+    }, [visible]);
 
-    if (visible) GetRepo(ReposContext.data[0].owner.login, 'notific', visible, isLoading)
+    if (visible) GetRepo(ReposContext.gitHubStore.list[0].owner.login, 'notific', isLoading)
     
     if (visible && data) return <Repo RepoItem={data} setVisible={setVisible}/>;
     return null;

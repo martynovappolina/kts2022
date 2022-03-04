@@ -18,7 +18,7 @@ const RepoTileDrawer: React.FC<RepoTileDrawerProps> = ({onClick}) => {
 
     return (
     <div className="ReposList">
-        {ReposContext.data.map((repo) => {
+        {ReposContext.gitHubStore.list.map((repo) => {
             return (
                 <NavLink  style={{ textDecoration: 'none', color: 'black' }} to={`/repos/${repo.name}`} key={repo.id}>
                     <Repotile key={repo.id} onClick={onClick} RepoItem={repo} />  

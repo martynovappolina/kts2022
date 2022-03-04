@@ -4,11 +4,12 @@ import React from 'react';
 
 import Avatar from '@components/Avatar';
 import StarIcon from '@components/StarIcon';
-import { RepoItem } from 'src/store/GitHubStore/types';
+import { RepoItemModel } from 'src/store/models/gitHub';
+
 
 type RepoTileProps = {
     onClick: (name: string) => void;
-    RepoItem: RepoItem;
+    RepoItem: RepoItemModel;
 };
 
 const Repotile: React.FC<RepoTileProps> = ({ onClick, RepoItem }) => {
@@ -17,16 +18,16 @@ const Repotile: React.FC<RepoTileProps> = ({ onClick, RepoItem }) => {
     };
     return (
         <div className={RepotileStyle.repotile} onClick={oonClick}>
-            <Avatar src={RepoItem.owner.avatar_url} letter={RepoItem.owner.login[0]} />
+            <Avatar src={RepoItem.owner.avatarUrl} letter={RepoItem.owner.login[0]} />
             <div className={RepotileStyle.repotile__Content}>
                 <div className={RepotileStyle.repotile__RepoName}>{RepoItem.name}</div>
                 <div className={RepotileStyle.repotile__OrgName}>{RepoItem.owner.login}</div>
                 <div className={RepotileStyle.repotile__Info}>
                     <div className={RepotileStyle.repotile__StarFrame}>
                         <StarIcon />
-                        {RepoItem.stargazers_count}
+                        {RepoItem.stargazersCount}
                     </div>
-                    Updated {RepoItem.created_at}
+                    Updated { RepoItem.createdAt }
                 </div>
             </div>
         </div>
