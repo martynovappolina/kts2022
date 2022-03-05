@@ -32,3 +32,20 @@ export const normalizeRepoItem = (
     createdAt: dayjs(from.created_at).format("DD MMM"),
     owner: normalizeGitHubRepoOwner(from.owner),
 });
+
+export const getInitialGitHubRepoOwnerModel = (): GitHubRepoOwnerModel => ({
+    id: 0,
+    url: '',
+    avatarUrl: '',
+    login: '',
+})
+
+export const getInitialRepoItemModel = (): RepoItemModel => ({
+    id: 0,
+    name: '',
+    owner: getInitialGitHubRepoOwnerModel(),
+    createdAt: '',
+    stargazersCount: 0,
+    language: '',
+    description: '',
+});

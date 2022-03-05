@@ -1,4 +1,4 @@
-import './RepoTileDrawer.scss'
+import repotileDrawerStyle from './RepoTileDrawer.module.scss'
 
 import React from "react";
 
@@ -8,20 +8,15 @@ import Repotile from "@components/RepoTile/Repotile";
 
 import { NavLink } from "react-router-dom";
 
-type RepoTileDrawerProps = {
-    onClick: (name: string) => void;
-  }
-  
-
-const RepoTileDrawer: React.FC<RepoTileDrawerProps> = ({onClick}) => {
-    const ReposContext = useReposContext();
+const RepoTileDrawer = () => {
+    const reposContext = useReposContext();
 
     return (
-    <div className="ReposList">
-        {ReposContext.gitHubStore.list.map((repo) => {
+    <div className={repotileDrawerStyle.reposList}>
+        {reposContext.gitHubStore.list.map((repo) => {
             return (
                 <NavLink  style={{ textDecoration: 'none', color: 'black' }} to={`/repos/${repo.name}`} key={repo.id}>
-                    <Repotile key={repo.id} onClick={onClick} RepoItem={repo} />  
+                    <Repotile RepoItem={repo} />  
                 </NavLink>         
             )
       })}

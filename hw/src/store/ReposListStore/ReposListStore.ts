@@ -1,6 +1,6 @@
 import ApiStore from '../../shared/store/ApiStore';
 import { IGitHubStore, GetOrganizationReposListParams, GetOrganizationRepoParams } from "./types";
-import { RequestParams, HTTPMethod, ApiResponse} from '../../shared/store/ApiStore/types';
+import { HTTPMethod } from '../../shared/store/ApiStore/types';
 import { ILocalStore } from '@utils/useLocalStore/useLocalStore';
 import { Meta } from '@utils/meta';
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
@@ -69,18 +69,8 @@ export default class ReposListStore implements IGitHubStore, ILocalStore {
         })
     }
 
-    async getOrganizationRepo(params: GetOrganizationRepoParams): Promise<ApiResponse<RepoItemModel, any>> {
-        let request: RequestParams<object> = {
-            method: HTTPMethod.GET,
-            endpoint: `repos/${params.organizationName}/${params.name}`,
-            headers: {
-                accept: "application/vnd.github.v3+json"
-            },
-            data: {}
-        }
-
-        return await this._apiStore.request<RepoItemModel>(request)
+    destroy(): void {
+        this._meta = Meta.initial;
+        this._list = getInitialCollectionModel();
     }
-
-    destroy(): void {}
 }

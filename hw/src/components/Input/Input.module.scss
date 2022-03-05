@@ -7,9 +7,9 @@
     border: 1px solid $color-border;
     box-sizing: border-box;
     border-radius: 1vh;
-}
 
-.input_line:focus {
-    border: 1px solid $accent;
-    outline:none;
+    &:focus {
+        border: 1px solid $accent;
+        outline:none;
+    }
 }
