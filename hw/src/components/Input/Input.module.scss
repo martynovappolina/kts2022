@@ -1,0 +1,15 @@
+@import '@styles/variables.scss';
+
+.input_line {
+    width: 23vw;
+    height: 7vh;
+    background: $background-primary;
+    border: 1px solid $color-border;
+    box-sizing: border-box;
+    border-radius: 1vh;
+
+    &:focus {
+        border: 1px solid $accent;
+        outline:none;
+    }
+}

@@ -1,73 +1,59 @@
-import SearchIcon from '@components/SearchIcon'
-import Button from '@components/Button'
-import RepoTile from '@components/RepoTile'
-import Input from '@components/Input'
-import GitHubStore from '../../store/GitHubStore'
-import { ApiResponse } from 'src/shared/store/ApiStore/types'
-import { RepoItem } from 'src/store/GitHubStore/types'
+import React, { useCallback, useEffect, useState } from 'react';
 
-import './ReposSearchPage.css'
-import { useCallback, useEffect, useState } from 'react'
+import Button from '@components/Button';
+import Input from '@components/Input';
+import SearchIcon from '@components/SearchIcon';
+import RepoTileDrawer from '@components/RepoTileDrawer';
+import Loading from '@components/Loading';
+import Error from '@components/Error';
+
+import ReposListStore from '@store/ReposListStore';
+
+import style from './ReposSearchPage.module.scss';
+
+import { observer } from 'mobx-react-lite';
+import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import { Meta } from '@utils/meta';
+
+const ReposContext = React.createContext({
+    gitHubStore: {} as ReposListStore,
+});
+const Provider = ReposContext.Provider;
+export const useReposContext = () => React.useContext(ReposContext);
 
 const ReposSearchPage = () => {
-    const [value, setValue] = useState('ktsstudio');
-    const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState([{
-        id: 123,    
-        name: 'kts-frontend-winter-school',
-        owner: {
-            login: 'ktsstudio',
-            avatar_url: ''
-        },
-        created_at: '21 Jul',
-        stargazers_count: 123,
-    }]); 
-    const gitHubStore = new GitHubStore();
+    const [value, setValue] = useState('');
 
-    const handleInput = useCallback((e) => setValue(e.target.value), [])
+    const gitHubStore = useLocalStore (() => new ReposListStore());
 
-    const handleClick = useCallback(() => {
-        const GetData = async () => {
+    const handleInput = useCallback((e) => setValue(e.target.value), []);
+
+    const handleClick = useCallback((value) => {   
+        const getData = async () => {
             try {
-                await gitHubStore.getOrganizationReposList({
-                  organizationName: value
-                }).then((result: ApiResponse<RepoItem[], any>) => {
-                    setData(result.data)
-                    setIsLoading(false)
-                  })
-            } catch (e) {}
-        };
-
-        setIsLoading(true)
-        GetData();
-    },[value, data]);
-
+              await gitHubStore.getOrganizationReposList({
+                organizationName: value
+              })
+            } catch (err) {}
+          };
+        getData();         
+    }, [value, gitHubStore]);
     
-    useEffect(() => handleClick(), [])
+    useEffect(():any => handleClick('ktsstudio'), []) 
 
     return (
-        <>
-            <div className="main">
-            <div className="SearchBar">
-                <Input value = {value} placeholder='Введите название организации' onChange={handleInput}/>
-                <Button onClick={handleClick} 
-                        children = {<SearchIcon/>} 
-                        disabled = {isLoading}/> 
+        <Provider value={{ gitHubStore }}>          
+            <div className={style.main}>
+                <div className={style.searchBar}>
+                    <Input value={value} placeholder="Введите название организации" onChange={handleInput} />
+                    <Button onClick={handleClick} children={<SearchIcon />} disabled={gitHubStore.meta} value={value} />
+                </div>
+                {gitHubStore.meta === Meta.error && <Error />}
+                {gitHubStore.meta === Meta.loading && <Loading />}
+                {gitHubStore.meta !== (Meta.loading || Meta.error) && <RepoTileDrawer />}
             </div>
+        </Provider>
+    );
+};
 
-            <div className="ReposList">
-                {   
-                    data.map(repo =>( 
-                        <RepoTile 
-                            key={repo.id}
-                            onClick={() => console.log("RepoTile is clicked")} 
-                            RepoItem={repo}/>
-                    ))
-                }
-            </div>
-        </div>
-        </>
-    )
-}
-
-export default ReposSearchPage
+export default observer(ReposSearchPage);

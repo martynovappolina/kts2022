@@ -1,34 +1,33 @@
-import './Repotile.css'
-import React from 'react'
-import Avatar from '@components/Avatar'
-import StarIcon from '@components/StarIcon'
-import { RepoItem } from 'src/store/GitHubStore/types'
+import repotileStyle from './Repotile.module.scss';
+
+import React from 'react';
+
+import Avatar from '@components/Avatar';
+import StarIcon from '@components/StarIcon';
+import { RepoItemModel } from 'src/store/models/gitHub';
+
 
 type RepoTileProps = {
-    onClick: (id:number) => void;
-    RepoItem: RepoItem
-}
+    RepoItem: RepoItemModel;
+};
 
-const Repotile: React.FC<RepoTileProps> = ({onClick, RepoItem}) => {
-    const oonClick = (e: React.MouseEvent) => {
-        onClick(RepoItem.id);
-      }
+const Repotile: React.FC<RepoTileProps> = ({ RepoItem }) => {
     return (
-            <div className="RepoTile" onClick={oonClick}>
-                <Avatar src={RepoItem.owner.avatar_url} letter = {RepoItem.owner.login[0]}/>
-                <div className="RepoTile__Content">
-                    <div className="RepoTile__RepoName">{RepoItem.name}</div>
-                    <div className="RepoTile__OrgName">{RepoItem.owner.login}</div>
-                    <div className="RepoTile__Info">
-                        <div className="RepoTile__StarFrame">
-                            <StarIcon/>
-                            {RepoItem.stargazers_count}
-                        </div>
-                        Updated {RepoItem.created_at}
+        <div className={repotileStyle.repotile}>
+            <Avatar src={RepoItem.owner.avatarUrl} letter={RepoItem.owner.login[0]} />
+            <div className={repotileStyle.repotile__Content}>
+                <div className={repotileStyle.repotile__RepoName}>{RepoItem.name}</div>
+                <div className={repotileStyle.repotile__OrgName}>{RepoItem.owner.login}</div>
+                <div className={repotileStyle.repotile__Info}>
+                    <div className={repotileStyle.repotile__StarFrame}>
+                        <StarIcon />
+                        {RepoItem.stargazersCount}
                     </div>
+                    Created at { RepoItem.createdAt }
                 </div>
-            </div> 
-    )
-}
+            </div>
+        </div>
+    );
+};
 
-export default React.memo(Repotile)
+export default React.memo(Repotile);

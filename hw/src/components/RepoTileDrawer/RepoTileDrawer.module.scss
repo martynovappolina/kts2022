@@ -1,0 +1,16 @@
+@import '@styles/variables.scss';
+
+.reposList {
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;  
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
